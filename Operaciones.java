@@ -44,13 +44,50 @@ public class Operaciones{
 
 	/**
 	*Metodo que  hace el producto por un escalar sobre el mismo arreglo
-	*@param	arr1 Arreglo a multiplicar
+	*@param	arr Arreglo a multiplicar
 	*@param escalar Escalar por el que se multiplicara
 	*/
-	public static void multiplicacionEscalar(ArrayList<Double> arr1, int escalar){
-		
+	public static void multiplicacionPorEscalar(ArrayList<Double> arr, int escalar){
+		for (int i = 0 ; i<arr.size() ; i++ ) {
+			arr.set(i, arr.get(i) * escalar);
+		}
+	}
+
+	/**
+	*Metodo que obtiene la norma de un vector
+	*@param	arr Arreglo al cual calcular la norma
+	*@return El tamaño resultante del vector
+	*/
+	public static double norma(ArrayList<Double> arr){		
+		Iterator<Double> it = arr.iterator();
+		double suma = 0;
+
+		while(it.hasNext())
+			suma += Math.pow(it.next(),2);
+
+		return Math.sqrt(suma);
+	}
+	
+	/**
+	*Metodo que obtiene el angulo entre dos vectores
+	*@param	arr1 Primer arreglo para calcular el angulo
+	*@param arr2 Segundo arreglo para calcular el angulo
+	*@return El angulo resultante
+	*/
+	public static double angulo(ArrayList<Double> arr1, ArrayList<Double> arr2){
+
+		return Math.acos(	productoPunto(arr1,arr2) / ( norma(arr1)*norma(arr2) )  );
 
 	}
 
+	private static double productoPunto(ArrayList<Double> arr1,ArrayList<Double> arr2){
+		Iterator<Double> it1 = arr1.iterator();
+		Iterator<Double> it2 = arr2.iterator();
+		double suma = 0;
+		while(it1.hasNext() && it2.hasNext()){
+			suma += (it1.next()*it2.next());
+		}
 
+		return suma;
+	} 
 }
