@@ -1,9 +1,9 @@
 /*
 2018-1
 	Galvez Martinez Ernesto
-	Bruno
-	Erick
-	Luis
+	Torres Caballero Bruno
+	Lopez Vite Erick Misael
+	Ríos Salazar Luis Francisco
 
 Breve descripcion: El programa debe recibir 2 vectores, y a partir de ellos,
 poder realizar suma, resta, multiplicacion por un escalar... (completar)
@@ -17,6 +17,7 @@ public class Principal
 //---------Declaración de variables---------------------------------------------------------------------------
 		int dimen = 100;						//Declaramos las filas (El límite son 100)
 		double escalar = 0;						//La constante por la cual se multiplicara la matriz
+		double norma = 0;
 		Vector vec1 = new Vector(dimen);		//Creamos el objeto Vector vec1
 		Vector vec2 = new Vector(dimen);		//Creamos el objeto Vector vec2
 		Vector vecR = new Vector(dimen);		//Creamos una tercer matriz para guardar los resultados
@@ -76,28 +77,47 @@ public class Principal
 				break;
 
 				
-				//Multiplicacion entre matrices A*B
+				//Multiplicacion por escalar A
 				case 6:
-					
+					vec1.setEscalar(escalar);
+					vecR = vec1.multEscalar();
+					System.out.println("Vector A * escalar:\t");
+					vecR.imprimeVector();
 				break;
 
 				
-				//Multiplicacion por escalar matriz A
+				//Multiplicacion por escalar B
 				case 7:
+					vec2.setEscalar(escalar);
+					vecR = vec2.multEscalar();
+					System.out.println("Vector B * escalar:\t");
+					vecR.imprimeVector();
 				break;
 
-				//Multilicacion por escalar matriz B
+				//Norma del Vector A
 				case 8:
+					norma = vec1.normaVector();
+					System.out.println("La norma del Vector A es:\t" + norma);
 				break;
 
 				
-				//Traza matriz A 
+				//Norma del Vector B 
 				case 9:
+					norma = vec2.normaVector();
+					System.out.println("La norma del Vector B es:\t" + norma);
 				break;
 
 				
-				//Traza matriz B
+				//Producto Punto
 				case 10:
+					escalar = vec1.productoPunto(vec2);
+					System.out.println("Producto Punto:\t" + escalar);
+				break;
+
+				//Angulo entre vectores
+				case 11:
+					escalar = vec1.anguloVectores(vec2);
+					System.out.println("Angulo entre Vectores:\t" + escalar + " radianes");
 				break;
 
 				default:

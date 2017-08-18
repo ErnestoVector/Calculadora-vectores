@@ -32,7 +32,7 @@ public class Vector
 	{
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.print("\nIngrese la dimencion del vector:\t");
+		System.out.print("\nIngrese la dimension del vector:\t");
 
 		//Aplicando validación (sólo valores positivos)
 		do
@@ -69,12 +69,17 @@ public class Vector
 	{
 		this.vec2 = vec2;
 	}
+
+	public double getEscalar()
+	{
+		return escalar;
+	}
 	
 	public void setEscalar(double escalar)
 	{
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.print("\nIngrese el escalar para multiplicar la matriz:\t");
+		System.out.print("\nIngrese el escalar para multiplicar el vector:\t");
 		escalar = sc.nextInt();
 		this.escalar = escalar;
 	}
@@ -153,4 +158,60 @@ public class Vector
 		return resta;
 	}
 
+	//Multiplicacion por un escalar
+	public Vector multEscalar()
+	{
+		Vector mult = new Vector(dimen);			//Nuevo vector para guardar el resultado de la multiplicacion
+
+		for (int i = 0; i < dimen; i++)
+		{
+				mult.vec1[i] = escalar * vec1[i]; 	//Multiplica el escalar por cada valor del vector
+		}	
+
+		return mult;		//Entrega el Vector "mult"
+	}
+
+	//Norma de un vector
+	public double normaVector()
+	{
+		double norma = 0;
+		double suma = 0;
+
+		for (int i = 0; i < dimen; i++)
+		{
+			norma = Math.pow(vec1[i], 2);
+			suma = norma + suma;
+		}
+
+		return Math.sqrt(suma);
+	}
+
+	//Producto punto entre vectores
+	public double productoPunto(Vector vec2)
+	{
+		double suma = 0;
+
+		if(getDimen() == vec2.getDimen())
+		{
+			for (int i = 0; i < dimen; i++) 
+			{
+				//Guarda en "suma" el resultado del vector 1 "vec1" y el vector 2 "vec2"
+				suma = suma + (vec1[i] * vec2.vec1[i]);
+				//vec2 es un parametro, por ello debemos acceder como objeto al arreglo	
+			}
+		}
+		else
+		{
+			System.out.println("Vectores incompatibles para la operacion");
+		}
+		
+		return suma;
+	}
+
+	//Angulo entre vectores
+	public double anguloVectores(Vector vec2)
+	{
+		return Math.acos( productoPunto(vec2) / (normaVector()*vec2.normaVector()) );
+	}
+	
 }
